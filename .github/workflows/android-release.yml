@@ -1,0 +1,46 @@
+name: Android release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+      - name: Install web dependencies
+        run: npm ci
+      - name: Check protected runtime
+        run: npm run check:runtime
+      - name: Build Android web assets
+        run: npm run build:android-ui
+      - name: Build debug APK
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
+      - name: Name release APK
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk RoboContol-${GITHUB_REF_NAME#v}-android.apk
+      - name: Publish GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: RoboContol-*-android.apk
