@@ -20,7 +20,7 @@ Choose what you want to control, connect using the matching transport, then use 
 ## Install in two minutes
 
 1. Open [the latest RoboContol release](https://github.com/Marwane-Haddane/RoboControl-mobileApp/releases/latest) on your Android phone.
-2. Download **RoboContol-1.5.0-android.apk** from the release assets.
+2. Download **RoboContol-1.5.1-android.apk** from the release assets.
 3. Open the downloaded APK. If Android asks, allow your browser or file manager to install unknown apps, then return to the installer and finish.
 4. Open RoboContol and choose a controller.
 
@@ -97,3 +97,4 @@ Freenove protocol and firmware references are credited in [FREENOVE-LICENSE.txt]
 ---
 
 <p align="center">Built by <strong>Marwane Haddane</strong></p>
+
